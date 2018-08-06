@@ -1,17 +1,15 @@
-package com.gmail.victorchuholskiy.languagegame.interactors.prepareRoundQuestions
+package com.gmail.victorchuholskiy.languagegame.useCases.prepareRoundQuestions
 
 import com.gmail.victorchuholskiy.languagegame.data.models.TranslationModel
 import com.gmail.victorchuholskiy.languagegame.data.models.TranslationQuestion
 import com.gmail.victorchuholskiy.languagegame.utils.QUESTION_PER_ROUND
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import java.util.*
 import kotlin.collections.ArrayList
 
 /**
- * Created by user
- * 26.07.2018.
+ * Created by victor.chuholskiy
+ * 06/08/18
  */
 class PrepareRoundQuestionsUseCaseImpl(private val list: List<TranslationModel>): PrepareRoundQuestionsUseCase {
 	override fun execute(): Observable<List<TranslationQuestion>> {

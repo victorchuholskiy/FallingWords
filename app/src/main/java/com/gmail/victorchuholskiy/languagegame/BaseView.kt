@@ -1,8 +1,8 @@
 package com.gmail.victorchuholskiy.languagegame
 
 /**
- * Created by viktor.chukholskiy
- * 25/07/18.
+ * Created by victor.chuholskiy
+ * 06/08/18
  */
 interface BaseView<T> {
 

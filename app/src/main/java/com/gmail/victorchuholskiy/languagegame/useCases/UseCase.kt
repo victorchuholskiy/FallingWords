@@ -1,10 +1,10 @@
-package com.gmail.victorchuholskiy.languagegame.interactors
+package com.gmail.victorchuholskiy.languagegame.useCases
 
 import io.reactivex.Observable
 
 /**
- * Created by viktor.chukholskiy
- * 25.07.2018.
+ * Created by victor.chuholskiy
+ * 06/08/18
  *
  * Base use case
  */

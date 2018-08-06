@@ -6,4 +6,7 @@
 	<color name="colorPrimary">@color/mainYellow</color>
 	<color name="colorPrimaryDark">@color/darkYellow</color>
 	<color name="colorAccent">@android:color/black</color>
+
+	<color name="colorRight">#14b959</color>
+	<color name="colorWrong">#ab1c15</color>
 </resources>

@@ -5,4 +5,48 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
+	<FrameLayout
+		android:id="@+id/v_game_area"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+
+		<TextView
+			android:id="@+id/tv_translation"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="TEST"
+			android:layout_gravity="center_horizontal"/>
+	</FrameLayout>
+
+	<TextView
+		android:id="@+id/tv_question"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="16dp">
+
+		<Button
+			android:id="@+id/fab_right"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/right"
+			android:theme="@style/AppTheme.RightButton"
+			style="@style/Widget.AppCompat.Button.Colored"/>
+
+		<Button
+			android:id="@+id/fab_wrong"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/wrong"
+			android:theme="@style/AppTheme.WrongButton"
+			style="@style/Widget.AppCompat.Button.Colored"/>
+	</LinearLayout>
+
 </LinearLayout>

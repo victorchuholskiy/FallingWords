@@ -1,3 +1,7 @@
 <resources>
 	<string name="app_name">Language Game</string>
+
+	<string name="is_translation_correct">Is the translation right for the word \"%1$s\"?</string>
+	<string name="right">Right</string>
+	<string name="wrong">Wrong</string>
 </resources>

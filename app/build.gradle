@@ -4,8 +4,6 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-apply plugin: 'kotlin-kapt'
-
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
@@ -43,13 +41,6 @@ dependencies {
 
     // GSON
     implementation 'com.google.code.gson:gson:2.8.5'
-
-	// Database
-	kapt "com.github.Raizlabs.DBFlow:dbflow-processor:$rootProject.ext.dbflowVersion"
-	implementation "com.github.Raizlabs.DBFlow:dbflow-core:$rootProject.ext.dbflowVersion"
-	implementation "com.github.Raizlabs.DBFlow:dbflow:$rootProject.ext.dbflowVersion"
-	implementation "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:$rootProject.ext.dbflowVersion"
-	implementation "com.github.Raizlabs.DBFlow:dbflow-rx2-kotlinextensions:$rootProject.ext.dbflowVersion"
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:$rootProject.ext.junitVersion"

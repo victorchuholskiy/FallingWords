@@ -5,7 +5,9 @@ import com.gmail.victorchuholskiy.languagegame.data.models.TranslationModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.exceptions.Exceptions
+import io.reactivex.schedulers.Schedulers
 import java.io.IOException
 
 /**
@@ -16,6 +18,8 @@ class ParseFileUseCaseImpl(private val assets: AssetManager): ParseFileUseCase {
 	override fun execute(): Observable<List<TranslationModel>> {
 
 		return Observable.just(assets)
+				.subscribeOn(Schedulers.newThread())
+				.observeOn(AndroidSchedulers.mainThread())
 				.map {
 					try {
 						val inputStream = it.open("words_v2.json")

@@ -31,7 +31,7 @@
 		android:padding="16dp">
 
 		<Button
-			android:id="@+id/fab_right"
+			android:id="@+id/btn_right"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
@@ -40,7 +40,7 @@
 			style="@style/Widget.AppCompat.Button.Colored"/>
 
 		<Button
-			android:id="@+id/fab_wrong"
+			android:id="@+id/btn_wrong"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"

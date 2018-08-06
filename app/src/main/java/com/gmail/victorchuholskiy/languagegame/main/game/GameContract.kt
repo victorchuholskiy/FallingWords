@@ -1,4 +1,4 @@
-package com.gmail.victorchuholskiy.languagegame.main
+package com.gmail.victorchuholskiy.languagegame.main.game
 
 import com.gmail.victorchuholskiy.languagegame.BasePresenter
 import com.gmail.victorchuholskiy.languagegame.BaseView
@@ -9,13 +9,23 @@ import com.gmail.victorchuholskiy.languagegame.BaseView
  *
  * This specifies the contract between the view and the presenter.
  */
-interface MainContract {
+interface GameContract {
 
 	interface View : BaseView<Presenter> {
+		fun startRound(word: String, translate: String)
 
+		fun answerCorrect()
+
+		fun answerIncorrect()
 	}
 
 	interface Presenter : BasePresenter {
+		fun gameAreaReady()
 
+		fun rightBtnClick()
+
+		fun wrongBtnClick()
+
+		fun timerOut()
 	}
 }

@@ -19,9 +19,10 @@ class GamePresenter(private val view: GameContract.View,
 
 	private val roundQuestions = ArrayList<TranslationQuestion>()
 	private var isGameAreaReady = false
-	private var currentQuestion = 0
+	private var currentQuestion = -1
 
 	override fun start() {
+		if (currentQuestion < 0) {
 			ParseFileUseCaseImpl(assetManager)
 					.execute()
 					.flatMap { PrepareRoundQuestionsUseCaseImpl(it).execute() }
@@ -33,6 +34,7 @@ class GamePresenter(private val view: GameContract.View,
 							view.startRound(roundQuestions[currentQuestion].eng, roundQuestions[currentQuestion].spa)
 						}
 					}
+		}
 	}
 
 
@@ -45,19 +47,19 @@ class GamePresenter(private val view: GameContract.View,
 	}
 
 	override fun rightBtnClick() {
-		if (currentQuestion < roundQuestions.size) {
+		if (currentQuestion in 0 until roundQuestions.size) {
 			processAnswer(roundQuestions[currentQuestion].isCorrect)
 		}
 	}
 
 	override fun wrongBtnClick() {
-		if (currentQuestion < roundQuestions.size) {
+		if (currentQuestion in 0 until roundQuestions.size) {
 			processAnswer(!roundQuestions[currentQuestion].isCorrect)
 		}
 	}
 
 	override fun timerOut() {
-		if (currentQuestion < roundQuestions.size) {
+		if (currentQuestion in 0 until roundQuestions.size) {
 			processAnswer(false)
 		}
 	}
@@ -76,6 +78,8 @@ class GamePresenter(private val view: GameContract.View,
 					count++
 				}
 			}
+			currentQuestion = -1
+			roundQuestions.clear()
 			view.showResult(count)
 		} else {
 			view.startRound(roundQuestions[currentQuestion].eng, roundQuestions[currentQuestion].spa)

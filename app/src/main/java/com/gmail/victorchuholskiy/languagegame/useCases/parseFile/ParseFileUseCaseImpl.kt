@@ -1,4 +1,4 @@
-package com.gmail.victorchuholskiy.languagegame.interactors.parseFile
+package com.gmail.victorchuholskiy.languagegame.useCases.parseFile
 
 import android.content.res.AssetManager
 import com.gmail.victorchuholskiy.languagegame.data.models.TranslationModel
@@ -11,13 +11,15 @@ import io.reactivex.schedulers.Schedulers
 import java.io.IOException
 
 /**
- * Created by user
- * 26.07.2018.
+ * Created by victor.chuholskiy
+ * 06/08/18
  */
-class DBParseFileUseCaseImpl(private val assets: AssetManager): DBParseFileUseCase {
+class ParseFileUseCaseImpl(private val assets: AssetManager): ParseFileUseCase {
 	override fun execute(): Observable<List<TranslationModel>> {
 
 		return Observable.just(assets)
+				.subscribeOn(Schedulers.newThread())
+				.observeOn(AndroidSchedulers.mainThread())
 				.map {
 					try {
 						val inputStream = it.open("words_v2.json")

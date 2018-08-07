@@ -1,3 +1,9 @@
 <resources>
 	<string name="app_name">Language Game</string>
+
+	<string name="is_translation_correct">Is the translation right for the word \"%1$s\"?</string>
+	<string name="count_of_correct_answers">Count of correct answers: %1$d</string>
+	<string name="right">Right</string>
+	<string name="wrong">Wrong</string>
+	<string name="repeat">Repeat</string>
 </resources>

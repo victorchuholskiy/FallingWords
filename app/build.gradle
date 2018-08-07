@@ -40,7 +40,7 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding-support-v4:$rootProject.ext.rxBindingVersion"
 
     // GSON
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
 
     // Dependencies for Android unit tests
     androidTestImplementation "junit:junit:$rootProject.ext.junitVersion"

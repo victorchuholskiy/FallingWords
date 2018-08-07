@@ -24,9 +24,8 @@ import java.util.*
  */
 class ParseFileUseCaseTest: BaseSchedulersTest() {
 
-	@Mock lateinit var context: Context
-
-	@Mock lateinit var assetManager: AssetManager
+	@Mock private lateinit var context: Context
+	@Mock private lateinit var assetManager: AssetManager
 
 	private var parseFileUseCase: ParseFileUseCase? = null
 

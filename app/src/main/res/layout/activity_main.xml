@@ -18,7 +18,7 @@
 			android:background="?attr/colorPrimary"
 			android:minHeight="?attr/actionBarSize"
 			android:theme="@style/AppTheme.Toolbar"
-			app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+			app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
 	</android.support.design.widget.AppBarLayout>
 
 	<android.support.design.widget.CoordinatorLayout

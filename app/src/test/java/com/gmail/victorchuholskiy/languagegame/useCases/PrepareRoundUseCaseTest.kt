@@ -9,10 +9,11 @@ import org.junit.Test
 import io.reactivex.observers.TestObserver
 import java.util.*
 
-
 /**
  * Created by victor.chuholskiy
  * 07.08.2018.
+ *
+ * Unit tests for the implementation of [PrepareRoundQuestionsUseCaseImpl]
  */
 class PrepareRoundUseCaseTest: BaseSchedulersTest() {
 
@@ -72,7 +73,7 @@ class PrepareRoundUseCaseTest: BaseSchedulersTest() {
 	}
 
 	@Test
-	fun prepareRound_zeroElements() {
+	fun prepareRound_emptyList() {
 		val testObserver: TestObserver<List<TranslationQuestion>> = PrepareRoundQuestionsUseCaseImpl(arrayListOf()).execute().test()
 		testObserver
 				.assertNoErrors()

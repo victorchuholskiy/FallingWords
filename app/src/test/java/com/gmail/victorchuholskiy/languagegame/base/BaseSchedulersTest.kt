@@ -11,7 +11,7 @@ import java.util.concurrent.Executor
 import java.util.concurrent.TimeUnit
 
 /**
- * Created by viktor.chukholskiy
+ * Created by victor.chuholskiy
  * 07/08/18.
  */
 open class BaseSchedulersTest {

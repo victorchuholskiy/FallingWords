@@ -15,14 +15,13 @@ import io.reactivex.observers.TestObserver
 import org.junit.Before
 import org.junit.Test
 import org.mockito.*
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import java.io.FileInputStream
 
 /**
- * Created by viktor.chukholskiy
+ * Created by victor.chuholskiy
  * 07/08/18.
-
+ *
  * Unit tests for the implementation of [GamePresenter]
  */
 class GamePresenterTest: BaseSchedulersTest() {
@@ -37,7 +36,8 @@ class GamePresenterTest: BaseSchedulersTest() {
 
 	private lateinit var gamePresenter: GamePresenter
 
-	@Before fun setupStatisticsPresenter() {
+	@Before
+	fun setupStatisticsPresenter() {
 		MockitoAnnotations.initMocks(this)
 
 		Mockito.doReturn(assetManager).`when`(context).assets
@@ -49,7 +49,8 @@ class GamePresenterTest: BaseSchedulersTest() {
 		gamePresenter = GamePresenter(gameView, assetManager)
 	}
 
-	@Test fun createPresenter_setsThePresenterToView() {
+	@Test
+	fun createPresenter_setsThePresenterToView() {
 		// Get a reference to the class under test
 		gamePresenter = GamePresenter(gameView, assetManager)
 
@@ -57,7 +58,8 @@ class GamePresenterTest: BaseSchedulersTest() {
 		verify(gameView).presenter = gamePresenter
 	}
 
-	@Test fun startFirstRound_gameAreaReady_CallViewToDisplay() {
+	@Test
+	fun startFirstRound_GameAreaReady_CallViewToDisplay() {
 		val eng = "one"
 		val spa = "uno"
 		val models = ArrayList<TranslationModel>()
@@ -84,7 +86,8 @@ class GamePresenterTest: BaseSchedulersTest() {
 		verify(gameView).startRound(capture(getStringArgumentsCaptor), capture(getStringArgumentsCaptor))
 	}
 
-	@Test fun startFirstRound_gameAreaNotReady() {
+	@Test
+	fun startFirstRound_GameAreaNotReady() {
 		val eng = "one"
 		val spa = "uno"
 		val models = ArrayList<TranslationModel>()
@@ -106,5 +109,35 @@ class GamePresenterTest: BaseSchedulersTest() {
 		testQuestionObserver.assertNoErrors()
 
 		gamePresenter.start()
+	}
+
+	@Test
+	fun timerOut_CallViewToDisplay() {
+		val models = ArrayList<TranslationModel>()
+		models.add(TranslationModel("one", "uno"))
+		models.add(TranslationModel("two", "dos"))
+
+		val questions = ArrayList<TranslationQuestion>()
+		for (model in models) {
+			questions.add(TranslationQuestion(model.eng!!, model.spa!!, true))
+		}
+
+		`when`(parseFileUseCase.execute()).thenReturn(Observable.just<List<TranslationModel>>(models))
+		val testObserver = TestObserver<List<TranslationModel>>()
+		parseFileUseCase.execute().subscribe(testObserver)
+		testObserver.assertValueCount(1)
+		testObserver.assertNoErrors()
+
+		`when`(prepareRoundQuestionsUseCase.execute()).thenReturn(Observable.just<List<TranslationQuestion>>(questions))
+		val testQuestionObserver = TestObserver<List<TranslationQuestion>>()
+		prepareRoundQuestionsUseCase.execute().subscribe(testQuestionObserver)
+		testQuestionObserver.assertValueCount(1)
+		testQuestionObserver.assertNoErrors()
+
+		gamePresenter.gameAreaReady()
+		gamePresenter.start()
+		gamePresenter.timerOut()
+		verify(gameView).answerIncorrect()
+		verify(gameView, times(2)).startRound(capture(getStringArgumentsCaptor), capture(getStringArgumentsCaptor))
 	}
 }

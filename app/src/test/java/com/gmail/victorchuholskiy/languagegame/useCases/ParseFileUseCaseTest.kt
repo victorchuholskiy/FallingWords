@@ -17,10 +17,11 @@ import org.mockito.ArgumentMatchers.anyString
 import java.io.FileInputStream
 import java.util.*
 
-
 /**
  * Created by victor.chuholskiy
  * 07.08.2018.
+ *
+ * Unit tests for the implementation of [ParseFileUseCaseImpl]
  */
 class ParseFileUseCaseTest: BaseSchedulersTest() {
 

@@ -1,14 +1,12 @@
-package com.gmail.victorchuholskiy.languagegame.main
+package com.gmail.victorchuholskiy.languagegame.game
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.gmail.victorchuholskiy.languagegame.R
-import com.gmail.victorchuholskiy.languagegame.main.game.GameFragment
-import com.gmail.victorchuholskiy.languagegame.main.game.GamePresenter
 import com.gmail.victorchuholskiy.languagegame.utils.replaceFragmentInActivity
 import com.gmail.victorchuholskiy.languagegame.utils.setupActionBar
 
-class MainActivity : AppCompatActivity() {
+class GameActivity : AppCompatActivity() {
 
 	private lateinit var presenter: GamePresenter
 

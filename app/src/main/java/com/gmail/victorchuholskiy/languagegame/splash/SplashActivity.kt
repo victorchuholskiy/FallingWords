@@ -2,7 +2,7 @@ package com.gmail.victorchuholskiy.languagegame.splash
 
 import android.support.v7.app.AppCompatActivity
 import android.content.Intent
-import com.gmail.victorchuholskiy.languagegame.main.MainActivity
+import com.gmail.victorchuholskiy.languagegame.game.GameActivity
 
 /**
  * Created by victor.chuholskiy
@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
 
 	override fun onResume() {
 		super.onResume()
-		startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+		startActivity(Intent(this@SplashActivity, GameActivity::class.java))
 		finish()
 	}
 }

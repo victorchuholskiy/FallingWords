@@ -1,4 +1,4 @@
-package com.gmail.victorchuholskiy.languagegame.main.game
+package com.gmail.victorchuholskiy.languagegame.game
 
 import com.gmail.victorchuholskiy.languagegame.BasePresenter
 import com.gmail.victorchuholskiy.languagegame.BaseView
@@ -17,6 +17,8 @@ interface GameContract {
 		fun answerCorrect()
 
 		fun answerIncorrect()
+
+		fun showResult(correctAnswersNumber: Int)
 	}
 
 	interface Presenter : BasePresenter {

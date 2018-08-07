@@ -1,7 +1,6 @@
-package com.gmail.victorchuholskiy.languagegame.main.game
+package com.gmail.victorchuholskiy.languagegame.game
 
 import android.content.res.AssetManager
-import android.util.Log
 import com.gmail.victorchuholskiy.languagegame.data.models.TranslationQuestion
 import com.gmail.victorchuholskiy.languagegame.useCases.parseFile.ParseFileUseCaseImpl
 import com.gmail.victorchuholskiy.languagegame.useCases.prepareRoundQuestions.PrepareRoundQuestionsUseCaseImpl
@@ -46,15 +45,21 @@ class GamePresenter(private val view: GameContract.View,
 	}
 
 	override fun rightBtnClick() {
-		processAnswer(roundQuestions[currentQuestion].isCorrect)
+		if (currentQuestion < roundQuestions.size) {
+			processAnswer(roundQuestions[currentQuestion].isCorrect)
+		}
 	}
 
 	override fun wrongBtnClick() {
-		processAnswer(!roundQuestions[currentQuestion].isCorrect)
+		if (currentQuestion < roundQuestions.size) {
+			processAnswer(!roundQuestions[currentQuestion].isCorrect)
+		}
 	}
 
 	override fun timerOut() {
-		processAnswer(false)
+		if (currentQuestion < roundQuestions.size) {
+			processAnswer(false)
+		}
 	}
 
 	private fun processAnswer(isAnswerCorrect: Boolean) {
@@ -65,7 +70,13 @@ class GamePresenter(private val view: GameContract.View,
 		roundQuestions[currentQuestion].isUserAnswerCorrect = isAnswerCorrect
 		currentQuestion++
 		if (currentQuestion >= roundQuestions.size) {
-
+			var count = 0
+			for (answer in roundQuestions) {
+				if (answer.isUserAnswerCorrect!!) {
+					count++
+				}
+			}
+			view.showResult(count)
 		} else {
 			view.startRound(roundQuestions[currentQuestion].eng, roundQuestions[currentQuestion].spa)
 		}

@@ -5,4 +5,4 @@ package com.gmail.victorchuholskiy.languagegame.utils
  * 06/08/18
  */
 const val QUESTION_PER_ROUND = 20
-const val ANSWER_TIMER_MILLISECONDS = 6000L //milliseconds
+const val ANSWER_TIMER_MILLISECONDS = 6000L

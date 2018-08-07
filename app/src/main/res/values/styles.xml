@@ -6,7 +6,7 @@
 	</style>
 
 	<style name="AppTheme.SplashTheme" parent="AppTheme">
-		<item name="android:windowBackground">@drawable/splash_background</item>
+		<item name="android:windowBackground">@drawable/bg_splash</item>
 	</style>
 
 	<style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -18,6 +18,11 @@
 
 	<style name="AppTheme.WrongButton" parent="Widget.AppCompat.Button.Colored">
 		<item name="colorAccent">@color/colorWrong</item>
+		<item name="android:textColor">@android:color/white</item>
+	</style>
+
+	<style name="AppTheme.RepeatButton" parent="Widget.AppCompat.Button.Colored">
+		<item name="colorAccent">@color/mainYellow</item>
 		<item name="android:textColor">@android:color/white</item>
 	</style>
 </resources>

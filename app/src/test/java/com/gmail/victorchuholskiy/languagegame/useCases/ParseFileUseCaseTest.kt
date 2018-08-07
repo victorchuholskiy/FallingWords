@@ -1,65 +1,60 @@
 package com.gmail.victorchuholskiy.languagegame.useCases
 
+import android.content.Context
 import android.content.res.AssetManager
+import com.gmail.victorchuholskiy.languagegame.base.BaseSchedulersTest
+import com.gmail.victorchuholskiy.languagegame.data.models.TranslationModel
 import com.gmail.victorchuholskiy.languagegame.useCases.parseFile.ParseFileUseCase
 import com.gmail.victorchuholskiy.languagegame.useCases.parseFile.ParseFileUseCaseImpl
+import io.reactivex.Observable
 import org.junit.Test
 import org.junit.Before
-import org.mockito.Mockito
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.android.plugins.RxAndroidPlugins
-import org.junit.BeforeClass
-import org.junit.AfterClass
+import org.mockito.Mock
+import io.reactivex.observers.TestObserver
+import org.mockito.Mockito.doReturn
+import org.mockito.MockitoAnnotations
+import org.mockito.ArgumentMatchers.anyString
+import java.io.FileInputStream
+import java.util.*
+
 
 /**
  * Created by victor.chuholskiy
  * 07.08.2018.
  */
-class ParseFileUseCaseTest {
+class ParseFileUseCaseTest: BaseSchedulersTest() {
+
+	@Mock lateinit var context: Context
+
+	@Mock lateinit var assetManager: AssetManager
 
 	private var parseFileUseCase: ParseFileUseCase? = null
 
-	private var assetManager = Mockito.mock(AssetManager::class.java)
-
 	@Before
 	fun setUp() {
+		MockitoAnnotations.initMocks(this)
+		doReturn(assetManager).`when`(context).assets
+
+		val resource = ParseFileUseCaseTest::class.java.classLoader.getResource("words_test.json")
+		val inputStream = FileInputStream(resource.path)
+		doReturn(inputStream).`when`(assetManager).open(anyString())
+
 		parseFileUseCase = ParseFileUseCaseImpl(assetManager)
 	}
 
 	@Test
-	fun parseFile() {
-		parseFileUseCase!!.execute()
-	}
-
-	/*@BeforeClass
-	fun setUpRxSchedulers() {
-		val immediate = object : Scheduler() {
-			override fun scheduleDirect(@NonNull run: Runnable, delay: Long, @NonNull unit: TimeUnit): Disposable {
-				// this prevents StackOverflowErrors when scheduling with a delay
-				return super.scheduleDirect(run, 0, unit)
-			}
-
-			override fun createWorker(): Worker {
-				return ExecutorScheduler.ExecutorWorker(Executor { it.run() })
-			}
-		}
-
-		RxJavaPlugins.setInitIoSchedulerHandler { _ -> immediate }
-		RxJavaPlugins.setInitComputationSchedulerHandler { _ -> immediate }
-		RxJavaPlugins.setInitNewThreadSchedulerHandler { _ -> immediate }
-		RxJavaPlugins.setInitSingleSchedulerHandler { _ -> immediate }
-		RxAndroidPlugins.setInitMainThreadSchedulerHandler { _ -> immediate }
-	}*/
-
-	companion object {
-		@BeforeClass
-		fun setUpClass() {
-			RxAndroidPlugins.setInitMainThreadSchedulerHandler { _ -> Schedulers.trampoline() }
-		}
-
-		@AfterClass
-		fun tearDownClass() {
-			RxAndroidPlugins.reset()
-		}
+	fun parseFile_checkCorrectness() {
+		val testObserver: TestObserver<List<TranslationModel>> = parseFileUseCase!!.execute().test()
+		testObserver
+				.assertNoErrors()
+				.assertValue {
+					it.isNotEmpty()
+				}
+				.assertValue {
+					Observable.fromIterable(it)
+							.map(TranslationModel::eng)
+							.toList()
+							.blockingGet() == Arrays.asList("primary school", "teacher", "pupil")
+				}
 	}
 }
